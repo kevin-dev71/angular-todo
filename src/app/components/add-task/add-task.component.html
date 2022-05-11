@@ -1,0 +1,16 @@
+<app-tasks-header title="New Task" [showGoBackButton]="true"></app-tasks-header>
+<form [formGroup]="newTaskForm" class="add-form" (ngSubmit)="createNewTask()">
+  <div class="form-control">
+    <label for="text">Task</label>
+    <input type="text" formControlName="text" id="text" placeholder="Add Task" autofocus />
+  </div>
+  <div class="form-control">
+    <label for="day">Day & Time</label>
+    <input type="text" formControlName="day" id="day" placeholder="Add Day & Time" />
+  </div>
+  <div class="form-control form-control-check">
+    <label for="completed">is Completed?</label>
+    <input type="checkbox" formControlName="completed" id="completed" />
+  </div>
+  <input type="submit" value="Save Task" class="btn btn-block" [ngStyle]="{ 'background-color': 'green' }" />
+</form>

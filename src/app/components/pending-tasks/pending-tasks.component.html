@@ -1,0 +1,28 @@
+<app-tasks-header title="My Tasks" [showAddButton]="true"></app-tasks-header>
+<div class="tasks" cdkDropListGroup>
+  <div class="example-container">
+    <h2>Pending tasks 📝</h2>
+
+    <div cdkDropList [cdkDropListData]="tasks" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="task-box" *ngFor="let item of pendingTasks" cdkDrag>
+        <app-task-item class="task" [task]="item" (onDeleteTask)="deleteTask(item)"></app-task-item>
+      </div>
+      <div *ngIf="showEmptyStateForPendingTasks">
+        <p>No Pending Tasks</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Completed tasks ✔️</h2>
+
+    <div cdkDropList [cdkDropListData]="tasks" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="task-box" *ngFor="let item of completedTasks" cdkDrag>
+        <app-task-item class="task" [task]="item" (onDeleteTask)="deleteTask(item)"></app-task-item>
+      </div>
+      <div *ngIf="showEmptyStateForCompletedTasks">
+        <p>No Completed Tasks</p>
+      </div>
+    </div>
+  </div>
+</div>

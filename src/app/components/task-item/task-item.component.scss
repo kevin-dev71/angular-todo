@@ -1,0 +1,9 @@
+.task.reminder {
+  border-left: 5px solid green;
+}
+
+.task h3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
