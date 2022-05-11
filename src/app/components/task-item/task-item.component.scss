@@ -7,3 +7,11 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+button .p-confirm-dialog-reject {
+  background: red;
+}
+
+.p-dialog-footer .p-button+.p-button {
+  background: red;
+}

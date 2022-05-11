@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { TaskService } from 'src/app/services/task.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-add-task',
@@ -11,19 +11,23 @@ import { TaskService } from 'src/app/services/task.service';
 export class AddTaskComponent implements OnInit {
   newTaskForm = new FormGroup({
     text: new FormControl('', Validators.required),
-    day: new FormControl(new Date().toLocaleDateString('en-US')),
+    day: new FormControl(new Date()),
     completed: new FormControl(false),
   });
-  constructor(private tasksService: TaskService, private toastr: ToastrService) {}
+  constructor(private tasksService: TaskService, private messageService: MessageService) {}
 
   ngOnInit(): void {}
 
   createNewTask() {
     if (this.newTaskForm.status === 'INVALID') {
-      this.toastr.error(`Please fill Text field.`);
+      this.messageService.add({ severity: 'warn', summary: 'Text Field', detail: 'Please add a task.' });
     } else {
       this.tasksService.addTask(this.newTaskForm.value);
-      this.toastr.success(`${this.newTaskForm.value.text} added successfully!`);
+      this.messageService.add({
+        severity: 'success',
+        summary: `Task: ${this.newTaskForm.value.text}`,
+        detail: `Added successfully!`,
+      });
     }
   }
 }

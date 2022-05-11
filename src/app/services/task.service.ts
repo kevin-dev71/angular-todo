@@ -8,11 +8,14 @@ import type { Task } from 'src/app/models/Task';
   providedIn: 'root',
 })
 export class TaskService {
-  tasks: Task[] = [];
+  tasks: Task[] = JSON.parse(localStorage.getItem('tasks') ?? '[]');
   completedTasks: Task[] = [];
   pendingTasks: Task[] = [];
 
-  constructor() {}
+  constructor() {
+    this.completedTasks = this.tasks.filter(item => item.completed);
+    this.pendingTasks = this.tasks.filter(item => !item.completed);
+  }
 
   getTasks(): Observable<Task[]> {
     const tasks = of(this.tasks);
@@ -33,12 +36,25 @@ export class TaskService {
     const newTask = { ...task, id: uuidv4() };
     this.tasks.push(newTask);
     task.completed ? this.completedTasks.push(newTask) : this.pendingTasks.push(newTask);
+    const jsonData = JSON.stringify(this.tasks);
+    localStorage.setItem('tasks', jsonData);
   }
 
   deleteTask(task: Task) {
     this.tasks = this.tasks.filter(item => item.id !== task.id);
     this.completedTasks = this.completedTasks.filter(item => item.id !== task.id);
     this.pendingTasks = this.pendingTasks.filter(item => item.id !== task.id);
+    const jsonData = JSON.stringify(this.tasks);
+    localStorage.setItem('tasks', jsonData);
+    return of(this.tasks);
+  }
+
+  updateTask(task: Task) {
+    this.tasks = this.tasks.map(item => (item.id === task.id ? { ...item, completed: !item.completed } : item));
+    this.completedTasks = this.completedTasks.filter(item => item.id !== task.id);
+    this.pendingTasks = this.pendingTasks.filter(item => item.id !== task.id);
+    const jsonData = JSON.stringify(this.tasks);
+    localStorage.setItem('tasks', jsonData);
     return of(this.tasks);
   }
 }

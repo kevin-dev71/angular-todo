@@ -1,11 +1,18 @@
 <header>
   <h1>{{ title }}</h1>
-  <a
+  <button
     *ngIf="showAddButton"
-    class="btn"
-    [ngStyle]="{ 'background-color': 'green' }"
-    routerLink="/add"
-    >Add Task</a
-  >
-  <a *ngIf="showGoBackButton" class="btn" routerLink="/">Go Back</a>
+    pButton
+    type="button"
+    label="Add Task"
+    pRipple
+    [routerLink]="'add'"
+    class="p-button-success"></button>
+  <button
+    pButton
+    pRipple
+    *ngIf="showGoBackButton"
+    class="p-button-outlined p-button-secondary"
+    [routerLink]="'/'"
+    label="Go Back"></button>
 </header>

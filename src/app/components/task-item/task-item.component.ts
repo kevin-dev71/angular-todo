@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { formatDate } from '@angular/common';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-
 import type { Task } from 'src/app/models/Task';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-task-item',
@@ -10,14 +11,23 @@ import type { Task } from 'src/app/models/Task';
 })
 export class TaskItemComponent implements OnInit {
   @Input() task!: Task;
-  @Output() onDeleteTask: EventEmitter<Task> = new EventEmitter();
+  @Output() dispatchDeleteTask: EventEmitter<Task> = new EventEmitter();
   faTimes = faTimes;
 
-  constructor() {}
+  constructor(private confirmationService: ConfirmationService) {}
 
   ngOnInit(): void {}
 
   onDelete(task: Task) {
-    this.onDeleteTask.emit(task);
+    this.confirmationService.confirm({
+      message: `Are you sure that you want to delete ${this.task.text} Task?`,
+      accept: () => {
+        this.dispatchDeleteTask.emit(task);
+      },
+    });
+  }
+
+  get date() {
+    return formatDate(new Date(this.task.day), 'yyyy-MM-dd', 'en-US');
   }
 }

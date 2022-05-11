@@ -3,7 +3,7 @@
     {{ task.text }}
   </h3>
   <p>
-    {{ task.day }}
+    {{ date }}
     <fa-icon
       (click)="onDelete(task)"
       [ngStyle]="{ color: 'red', float: 'right', cursor: 'pointer' }"

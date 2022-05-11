@@ -1,16 +1,28 @@
 <app-tasks-header title="New Task" [showGoBackButton]="true"></app-tasks-header>
 <form [formGroup]="newTaskForm" class="add-form" (ngSubmit)="createNewTask()">
   <div class="form-control">
-    <label for="text">Task</label>
-    <input type="text" formControlName="text" id="text" placeholder="Add Task" autofocus />
+    <span class="p-float-label">
+      <input id="float-input" type="text" pInputText formControlName="text" />
+      <label for="float-input">Task</label>
+    </span>
   </div>
-  <div class="form-control">
-    <label for="day">Day & Time</label>
-    <input type="text" formControlName="day" id="day" placeholder="Add Day & Time" />
+  <div class="field col-12 md:col-4">
+    <label for="day">Day & Time</label><br />
+    <p-calendar
+      [ngStyle]="{ width: '100%' }"
+      [style]="{ width: '100%' }"
+      [inputStyle]="{ width: '100%' }"
+      dateFormat="yy/mm/dd"
+      formControlName="day"
+      [showIcon]="true"
+      appendTo="body"
+      inputId="day"></p-calendar>
   </div>
   <div class="form-control form-control-check">
     <label for="completed">is Completed?</label>
-    <input type="checkbox" formControlName="completed" id="completed" />
+    <input class="p-checkbox-box" type="checkbox" formControlName="completed" id="completed" />
+    <!-- <p-checkbox formControlName="completed"></p-checkbox> -->
+    <!-- <p-checkbox [formControl]="newTaskForm.controls['completed']"></p-checkbox> -->
   </div>
-  <input type="submit" value="Save Task" class="btn btn-block" [ngStyle]="{ 'background-color': 'green' }" />
+  <button pButton pRipple type="submit" label="Save Task" class="p-button-rounded p-button-success btn-block"></button>
 </form>

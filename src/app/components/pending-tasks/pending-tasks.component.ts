@@ -10,7 +10,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./pending-tasks.component.scss'],
 })
 export class PendingTasksComponent implements OnInit {
-  @Output() onDeleteTask: EventEmitter<Task> = new EventEmitter();
+  @Output() dispatchDeleteTask: EventEmitter<Task> = new EventEmitter();
   tasks: Task[] = [];
   completedTasks: Task[] = [];
   pendingTasks: Task[] = [];
@@ -68,9 +68,7 @@ export class PendingTasksComponent implements OnInit {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
       // change completedState of task
       const task = event.container.data[event.currentIndex];
-      task.completed = !task.completed;
-      this.showEmptyStateForPendingTasks = this.pendingTasks.length <= 0;
-      this.showEmptyStateForCompletedTasks = this.completedTasks.length <= 0;
+      this.tasksService.updateTask(task).subscribe(tasks => this.filterTasks(tasks));
     }
   }
 }

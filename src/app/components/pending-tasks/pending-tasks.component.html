@@ -5,7 +5,7 @@
 
     <div cdkDropList [cdkDropListData]="pendingTasks" class="example-list" (cdkDropListDropped)="drop($event)">
       <div class="task-box" *ngFor="let item of pendingTasks" cdkDrag>
-        <app-task-item class="task pending" [task]="item" (onDeleteTask)="deleteTask(item)"></app-task-item>
+        <app-task-item class="task pending" [task]="item" (dispatchDeleteTask)="deleteTask(item)"></app-task-item>
       </div>
       <div *ngIf="showEmptyStateForPendingTasks">
         <p>No Pending Tasks</p>
@@ -18,7 +18,7 @@
 
     <div cdkDropList [cdkDropListData]="completedTasks" class="example-list" (cdkDropListDropped)="drop($event)">
       <div class="task-box" *ngFor="let item of completedTasks" cdkDrag>
-        <app-task-item class="task completed" [task]="item" (onDeleteTask)="deleteTask(item)"></app-task-item>
+        <app-task-item class="task completed" [task]="item" (dispatchDeleteTask)="deleteTask(item)"></app-task-item>
       </div>
       <div *ngIf="showEmptyStateForCompletedTasks">
         <p>No Completed Tasks</p>
