@@ -62,11 +62,15 @@ export class PendingTasksComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<Task[]>) {
-    console.log(event);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      // change completedState of task
+      const task = event.container.data[event.currentIndex];
+      task.completed = !task.completed;
+      this.showEmptyStateForPendingTasks = this.pendingTasks.length <= 0;
+      this.showEmptyStateForCompletedTasks = this.completedTasks.length <= 0;
     }
   }
 }
