@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -46,7 +45,6 @@ import { ConfirmationService } from 'primeng/api';
     ReactiveFormsModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
     ButtonModule,
     RippleModule,
     ToastModule,
