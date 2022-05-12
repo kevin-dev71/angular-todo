@@ -21,4 +21,11 @@ describe('TasksFooterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should contain text "Kevin © 2022"', () => {
+    const fixture = TestBed.createComponent(TasksFooterComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('footer')?.textContent).toContain('Kevin © 2022');
+  });
 });

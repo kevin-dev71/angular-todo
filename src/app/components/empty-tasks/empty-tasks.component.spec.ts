@@ -21,4 +21,9 @@ describe('EmptyTasksComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should display "No tasks yet" text as empty state', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('p')?.textContent).toContain('No tasks yet');
+  });
 });
