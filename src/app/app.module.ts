@@ -20,7 +20,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RippleModule } from 'primeng/ripple';
 import { EmptyTasksComponent } from './components/empty-tasks/empty-tasks.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
-import { AutoFocus } from './directives/autofocus.directive';
 import { PendingTasksComponent } from './components/pending-tasks/pending-tasks.component';
 
 import { MessageService } from 'primeng/api';
@@ -35,7 +34,6 @@ import { ConfirmationService } from 'primeng/api';
     TaskItemComponent,
     EmptyTasksComponent,
     AddTaskComponent,
-    AutoFocus,
     PendingTasksComponent,
   ],
   imports: [

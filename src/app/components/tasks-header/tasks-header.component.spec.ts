@@ -8,9 +8,8 @@ describe('TasksHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TasksHeaderComponent ]
-    })
-    .compileComponents();
+      declarations: [TasksHeaderComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
