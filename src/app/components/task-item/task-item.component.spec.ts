@@ -25,6 +25,7 @@ describe('TaskItemComponent', () => {
       text: 'testing task',
       day: mockDate,
       completed: false,
+      sortedPosition: 0,
     };
     fixture.detectChanges();
   });

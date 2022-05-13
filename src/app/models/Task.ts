@@ -3,4 +3,5 @@ export interface Task {
   text: string;
   day: string;
   completed: boolean;
+  sortedPosition: number;
 }

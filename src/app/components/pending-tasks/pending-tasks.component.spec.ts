@@ -18,12 +18,14 @@ describe('PendingTasksComponent', () => {
       text: 'Task 1',
       completed: false,
       day: mockDateString,
+      sortedPosition: 0,
     },
     {
       id: '2',
       text: 'Task 2',
       completed: false,
       day: mockDateString,
+      sortedPosition: 1,
     },
   ];
 
@@ -33,12 +35,14 @@ describe('PendingTasksComponent', () => {
       text: 'Task 1',
       completed: true,
       day: mockDateString,
+      sortedPosition: 0,
     },
     {
       id: '2',
       text: 'Task 2',
       completed: true,
       day: mockDateString,
+      sortedPosition: 1,
     },
   ];
 

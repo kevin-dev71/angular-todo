@@ -26,10 +26,11 @@ export class PendingTasksComponent implements OnInit {
   constructor(private tasksService: TaskService) {}
 
   ngOnInit(): void {
+    this.getTasks();
     this.getPendingTasks();
     this.getCompletedTasks();
-    this.getTasks();
-    this.fakeLoading(1200);
+    this.filterTasks(this.tasks);
+    this.fakeLoading(1500);
   }
 
   getTasks(): void {
@@ -59,8 +60,12 @@ export class PendingTasksComponent implements OnInit {
 
   filterTasks(tasks: Task[]) {
     this.tasks = tasks;
-    this.completedTasks = tasks.filter(task => task.completed);
-    this.pendingTasks = tasks.filter(task => !task.completed);
+    this.completedTasks = tasks
+      .filter(task => task.completed)
+      .sort((task1, task2) => task1.sortedPosition - task2.sortedPosition);
+    this.pendingTasks = tasks
+      .filter(task => !task.completed)
+      .sort((task1, task2) => task1.sortedPosition - task2.sortedPosition);
     this.showEmptyStateForPendingTasks = this.pendingTasks.length <= 0;
     this.showEmptyStateForCompletedTasks = this.completedTasks.length <= 0;
     this.showEmptyState = this.tasks.length <= 0;
@@ -69,11 +74,32 @@ export class PendingTasksComponent implements OnInit {
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      const task = event.container.data[event.currentIndex];
+      if (task.completed) {
+        this.tasksService
+          .updateCompletedTasksOnSort(event.container.data, task)
+          .subscribe(tasks => this.filterTasks(tasks));
+      } else {
+        this.tasksService
+          .updatePendingTasksOnSort(event.container.data, task)
+          .subscribe(tasks => this.filterTasks(tasks));
+      }
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
       // change completedState of task
       const task = event.container.data[event.currentIndex];
-      this.tasksService.updateTask(task).subscribe(tasks => this.filterTasks(tasks));
+      task.completed = !task.completed;
+      this.tasksService.updateTask(task).subscribe(_ => {
+        if (task.completed) {
+          this.tasksService
+            .updateCompletedTasksOnSort(event.container.data, task)
+            .subscribe(tasks => this.filterTasks(tasks));
+        } else {
+          this.tasksService
+            .updatePendingTasksOnSort(event.container.data, task)
+            .subscribe(tasks => this.filterTasks(tasks));
+        }
+      });
     }
   }
 

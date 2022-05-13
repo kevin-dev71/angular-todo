@@ -20,3 +20,5 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 - Jasmine and Karma Testing.
 - Typescript.
   
+## deployed
+https://angular-todo-delta.vercel.app/

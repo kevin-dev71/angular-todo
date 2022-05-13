@@ -17,12 +17,14 @@ describe('TaskService', () => {
       text: 'Task 1',
       completed: false,
       day: mockDateString,
+      sortedPosition: 0,
     },
     {
       id: '2',
       text: 'Task 2',
       completed: false,
       day: mockDateString,
+      sortedPosition: 1,
     },
   ];
 
@@ -31,6 +33,7 @@ describe('TaskService', () => {
     text: 'Task 3',
     completed: false,
     day: mockDateString,
+    sortedPosition: 2,
   };
 
   beforeEach(() => {
@@ -88,6 +91,7 @@ describe('TaskService', () => {
       text: 'Task 1',
       completed: false,
       day: mockDateString,
+      sortedPosition: 1,
     };
     service.tasks = [...mockTasksArr];
 
@@ -103,6 +107,7 @@ describe('TaskService', () => {
       text: 'Task 1',
       completed: false,
       day: mockDateString,
+      sortedPosition: 1,
     };
     service.tasks = [...mockTasksArr];
 
