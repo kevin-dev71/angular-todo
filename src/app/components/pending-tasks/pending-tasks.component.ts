@@ -1,9 +1,12 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import type { Task } from 'src/app/models/Task';
 import { TaskService } from 'src/app/services/task.service';
 
+import { timer } from 'rxjs';
+
+import type { Task } from 'src/app/models/Task';
+
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-pending-tasks',
   templateUrl: './pending-tasks.component.html',
@@ -18,6 +21,7 @@ export class PendingTasksComponent implements OnInit {
   showEmptyStateForCompletedTasks = this.completedTasks.length <= 0;
   showEmptyStateForPendingTasks = this.pendingTasks.length <= 0;
   faTimes = faTimes;
+  loading = true;
 
   constructor(private tasksService: TaskService) {}
 
@@ -25,6 +29,7 @@ export class PendingTasksComponent implements OnInit {
     this.getPendingTasks();
     this.getCompletedTasks();
     this.getTasks();
+    this.fakeLoading(1200);
   }
 
   getTasks(): void {
@@ -70,5 +75,11 @@ export class PendingTasksComponent implements OnInit {
       const task = event.container.data[event.currentIndex];
       this.tasksService.updateTask(task).subscribe(tasks => this.filterTasks(tasks));
     }
+  }
+
+  fakeLoading(ms: number) {
+    timer(ms).subscribe(() => {
+      this.loading = false;
+    });
   }
 }

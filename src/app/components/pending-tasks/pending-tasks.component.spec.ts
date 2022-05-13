@@ -72,7 +72,17 @@ describe('PendingTasksComponent', () => {
     expect(completedTasksDiv.querySelector('h2')?.textContent).toContain('Completed tasks');
   });
 
+  it('should contain a skeleton loading', () => {
+    component.loading = true;
+    component.showEmptyStateForPendingTasks = false;
+    const compiled = fixture.nativeElement as HTMLElement;
+    fixture.detectChanges();
+
+    expect(compiled.querySelectorAll('app-skeleton-task-item')).toBeTruthy();
+  });
+
   it('should contain a list of 2 pending tasks', () => {
+    component.loading = false;
     component.pendingTasks = mockTasksArr;
     component.showEmptyStateForPendingTasks = false;
     const compiled = fixture.nativeElement as HTMLElement;
@@ -85,6 +95,7 @@ describe('PendingTasksComponent', () => {
   });
 
   it('should contain a list of 2 completed tasks', () => {
+    component.loading = false;
     component.completedTasks = mockCompletedTasksArr;
     component.showEmptyStateForCompletedTasks = false;
 
@@ -98,6 +109,7 @@ describe('PendingTasksComponent', () => {
   });
 
   it('should contain a list of 2 completed tasks and a list of 2 pending tasks', () => {
+    component.loading = false;
     component.completedTasks = mockCompletedTasksArr;
     component.pendingTasks = mockTasksArr;
 

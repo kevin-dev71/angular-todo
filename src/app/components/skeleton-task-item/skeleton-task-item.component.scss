@@ -1,0 +1,17 @@
+.loading {
+  display: flex;
+  width: 100%;
+  position: relative;
+
+  .side-skeleton {
+    position: absolute;
+    width: 3%;
+    top: -10px;
+    left: -20px;
+    height: 135%;
+  }
+
+  .body-skeleton {
+    width: 100%;
+  }
+}
