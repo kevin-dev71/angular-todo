@@ -13,8 +13,12 @@ export class TaskService {
   pendingTasks: Task[] = [];
 
   constructor() {
-    this.completedTasks = this.tasks.filter(item => item.completed);
-    this.pendingTasks = this.tasks.filter(item => !item.completed);
+    this.completedTasks = this.tasks
+      .filter(item => item.completed)
+      .sort((task1, task2) => task1.sortedPosition - task2.sortedPosition);
+    this.pendingTasks = this.tasks
+      .filter(item => !item.completed)
+      .sort((task1, task2) => task1.sortedPosition - task2.sortedPosition);
   }
 
   getTasks(): Observable<Task[]> {
@@ -33,7 +37,7 @@ export class TaskService {
   }
 
   addTask(task: Task) {
-    const newTask = { ...task, id: uuidv4() };
+    const newTask = { ...task, id: uuidv4(), sortedPosition: this.tasks.length };
     this.tasks.push(newTask);
     task.completed ? this.completedTasks.push(newTask) : this.pendingTasks.push(newTask);
     const jsonData = JSON.stringify(this.tasks);
@@ -50,9 +54,31 @@ export class TaskService {
   }
 
   updateTask(task: Task) {
-    this.tasks = this.tasks.map(item => (item.id === task.id ? { ...item, completed: !item.completed } : item));
-    this.completedTasks = this.completedTasks.filter(item => item.id !== task.id);
-    this.pendingTasks = this.pendingTasks.filter(item => item.id !== task.id);
+    this.tasks = this.tasks.map(item => (item.id === task.id ? task : item));
+    this.completedTasks = this.completedTasks
+      .filter(item => item.id !== task.id)
+      .sort((task1, task2) => task1.sortedPosition - task2.sortedPosition);
+    this.pendingTasks = this.pendingTasks
+      .filter(item => item.id !== task.id)
+      .sort((task1, task2) => task1.sortedPosition - task2.sortedPosition);
+    const jsonData = JSON.stringify(this.tasks);
+    localStorage.setItem('tasks', jsonData);
+    return of(this.tasks);
+  }
+
+  updateCompletedTasksOnSort(tasks: Task[], task: Task) {
+    this.completedTasks = tasks.map((item, index) => ({ ...item, sortedPosition: index }));
+    this.pendingTasks.filter(item => item.id !== task.id);
+    this.tasks = [...this.pendingTasks, ...this.completedTasks];
+    const jsonData = JSON.stringify(this.tasks);
+    localStorage.setItem('tasks', jsonData);
+    return of([...this.pendingTasks, ...this.completedTasks]);
+  }
+
+  updatePendingTasksOnSort(tasks: Task[], task: Task) {
+    this.pendingTasks = tasks.map((item, index) => ({ ...item, sortedPosition: index }));
+    this.completedTasks.filter(item => item.id !== task.id);
+    this.tasks = [...this.pendingTasks, ...this.completedTasks];
     const jsonData = JSON.stringify(this.tasks);
     localStorage.setItem('tasks', jsonData);
     return of(this.tasks);
