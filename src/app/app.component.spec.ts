@@ -5,13 +5,14 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { AppComponent } from './app.component';
 import { TasksFooterComponent } from './components/tasks-footer/tasks-footer.component';
+import { SkeletonTaskItemComponent } from './components/skeleton-task-item/skeleton-task-item.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, ToastModule, ConfirmDialogModule],
-      declarations: [AppComponent, TasksFooterComponent],
+      declarations: [AppComponent, TasksFooterComponent, SkeletonTaskItemComponent],
       providers: [MessageService, ConfirmationService],
     }).compileComponents();
   });

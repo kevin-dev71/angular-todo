@@ -3,7 +3,20 @@
   <div class="example-container">
     <h2>Pending tasks 📝</h2>
 
-    <div cdkDropList [cdkDropListData]="pendingTasks" class="example-list" (cdkDropListDropped)="drop($event)">
+    <ng-container *ngIf="loading">
+      <div class="task" [ngStyle]="{ cursor: 'initial' }" *ngFor="let item of pendingTasks">
+        <app-skeleton-task-item></app-skeleton-task-item>
+      </div>
+      <div *ngIf="pendingTasks.length <= 0" class="task" [ngStyle]="{ cursor: 'initial' }">
+        <app-skeleton-task-item></app-skeleton-task-item>
+      </div>
+    </ng-container>
+    <div
+      *ngIf="!loading"
+      cdkDropList
+      [cdkDropListData]="pendingTasks"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
       <div class="task-box" *ngFor="let item of pendingTasks" cdkDrag>
         <app-task-item class="task pending" [task]="item" (dispatchDeleteTask)="deleteTask(item)"></app-task-item>
       </div>
@@ -16,9 +29,27 @@
   <div class="example-container">
     <h2>Completed tasks ✔️</h2>
 
-    <div cdkDropList [cdkDropListData]="completedTasks" class="example-list" (cdkDropListDropped)="drop($event)">
+    <ng-container *ngIf="loading">
+      <div class="task" [ngStyle]="{ cursor: 'initial' }" *ngFor="let item of completedTasks">
+        <app-skeleton-task-item></app-skeleton-task-item>
+      </div>
+      <div *ngIf="completedTasks.length <= 0" class="task" [ngStyle]="{ cursor: 'initial' }">
+        <app-skeleton-task-item></app-skeleton-task-item>
+      </div>
+    </ng-container>
+    <div
+      *ngIf="!loading"
+      cdkDropList
+      [cdkDropListData]="completedTasks"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
       <div class="task-box" *ngFor="let item of completedTasks" cdkDrag>
-        <app-task-item class="task completed" [task]="item" (dispatchDeleteTask)="deleteTask(item)"></app-task-item>
+        <app-skeleton-task-item *ngIf="loading"></app-skeleton-task-item>
+        <app-task-item
+          *ngIf="!loading"
+          class="task completed"
+          [task]="item"
+          (dispatchDeleteTask)="deleteTask(item)"></app-task-item>
       </div>
       <div *ngIf="showEmptyStateForCompletedTasks">
         <p>No Completed Tasks</p>

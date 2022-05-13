@@ -10,6 +10,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SkeletonModule } from 'primeng/skeleton';
 
 import { AppComponent } from './app.component';
 import { TasksHeaderComponent } from './components/tasks-header/tasks-header.component';
@@ -24,6 +25,7 @@ import { PendingTasksComponent } from './components/pending-tasks/pending-tasks.
 
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
+import { SkeletonTaskItemComponent } from './components/skeleton-task-item/skeleton-task-item.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { ConfirmationService } from 'primeng/api';
     EmptyTasksComponent,
     AddTaskComponent,
     PendingTasksComponent,
+    SkeletonTaskItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { ConfirmationService } from 'primeng/api';
     InputTextModule,
     CalendarModule,
     ConfirmDialogModule,
+    SkeletonModule,
   ],
   providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent],

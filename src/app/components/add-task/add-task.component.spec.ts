@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TasksHeaderComponent } from '../tasks-header/tasks-header.component';
 
@@ -10,6 +11,7 @@ describe('AddTaskComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       declarations: [AddTaskComponent, TasksHeaderComponent],
       providers: [MessageService, ConfirmationService],
     }).compileComponents();

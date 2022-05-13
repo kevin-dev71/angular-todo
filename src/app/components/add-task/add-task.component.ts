@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TaskService } from 'src/app/services/task.service';
 import { MessageService } from 'primeng/api';
 
@@ -14,7 +15,8 @@ export class AddTaskComponent implements OnInit {
     day: new FormControl(new Date()),
     completed: new FormControl(false),
   });
-  constructor(private tasksService: TaskService, private messageService: MessageService) {}
+  minDate = new Date();
+  constructor(private tasksService: TaskService, private messageService: MessageService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -28,6 +30,7 @@ export class AddTaskComponent implements OnInit {
         summary: `Task: ${this.newTaskForm.value.text}`,
         detail: `Added successfully!`,
       });
+      this.router.navigate(['/']);
     }
   }
 }
