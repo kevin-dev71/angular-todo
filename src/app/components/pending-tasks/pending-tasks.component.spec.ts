@@ -6,7 +6,7 @@ import { TasksHeaderComponent } from 'src/app/components/tasks-header/tasks-head
 
 import { formatDate } from '@angular/common';
 
-import type { Task } from 'src/app/models/Task';
+import type { Task } from 'src/app/models/task';
 
 describe('PendingTasksComponent', () => {
   let component: PendingTasksComponent;

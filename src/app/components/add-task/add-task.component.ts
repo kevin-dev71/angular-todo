@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TaskService } from 'src/app/services/task.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.scss'],
 })
-export class AddTaskComponent implements OnInit {
-  newTaskForm = new FormGroup({
+export class AddTaskComponent {
+  public newTaskForm: FormGroup = new FormGroup({
     text: new FormControl('', Validators.required),
     day: new FormControl(new Date()),
     completed: new FormControl(false),
   });
-  minDate = new Date();
+  public minDate: Date = new Date();
+
   constructor(private tasksService: TaskService, private messageService: MessageService, private router: Router) {}
 
-  ngOnInit(): void {}
-
-  createNewTask() {
+  public createNewTask(): void {
     if (this.newTaskForm.status === 'INVALID') {
       this.messageService.add({ severity: 'warn', summary: 'Text Field', detail: 'Please add a task.' });
     } else {

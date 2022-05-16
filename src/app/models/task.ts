@@ -5,3 +5,5 @@ export interface Task {
   completed: boolean;
   sortedPosition: number;
 }
+
+export type TasksType = 'COMPLETED' | 'PENDING';

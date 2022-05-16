@@ -5,9 +5,9 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './empty-tasks.component.html',
   styleUrls: ['./empty-tasks.component.scss'],
 })
-export class EmptyTasksComponent implements OnInit {
-  @Input() text: string = 'No tasks yet';
-  constructor() {}
-
-  ngOnInit(): void {}
+export class EmptyTasksComponent {
+  @Input() public text: string = 'No tasks yet';
+  constructor() {
+    // ToDo
+  }
 }
