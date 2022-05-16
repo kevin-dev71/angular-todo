@@ -5,12 +5,12 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './tasks-header.component.html',
   styleUrls: ['./tasks-header.component.scss'],
 })
-export class TasksHeaderComponent implements OnInit {
+export class TasksHeaderComponent {
   @Input() title!: string;
   @Input() showAddButton: boolean = false;
   @Input() showGoBackButton: boolean = false;
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  constructor() {
+    // ToDo
+  }
 }

@@ -8,6 +8,12 @@
   white-space: nowrap;
 }
 
+.delete-icon {
+  color: red;
+  float: right;
+  cursor: pointer;
+}
+
 button .p-confirm-dialog-reject {
   background: red;
 }

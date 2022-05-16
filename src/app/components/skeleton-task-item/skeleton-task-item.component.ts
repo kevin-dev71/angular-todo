@@ -5,8 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './skeleton-task-item.component.html',
   styleUrls: ['./skeleton-task-item.component.scss'],
 })
-export class SkeletonTaskItemComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class SkeletonTaskItemComponent {
+  constructor() {
+    // ToDo
+  }
 }

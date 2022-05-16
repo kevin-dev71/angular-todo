@@ -4,9 +4,6 @@
   </h3>
   <p>
     {{ date }}
-    <fa-icon
-      (click)="onDelete(task)"
-      [ngStyle]="{ color: 'red', float: 'right', cursor: 'pointer' }"
-      [icon]="faTimes"></fa-icon>
+    <fa-icon class="delete-icon" (click)="onDelete(task)" [icon]="faTimes"></fa-icon>
   </p>
 </div>
