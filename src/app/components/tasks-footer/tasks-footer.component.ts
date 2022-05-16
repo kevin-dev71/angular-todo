@@ -5,8 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './tasks-footer.component.html',
   styleUrls: ['./tasks-footer.component.scss'],
 })
-export class TasksFooterComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class TasksFooterComponent {
+  constructor() {
+    // ToDo
+  }
 }

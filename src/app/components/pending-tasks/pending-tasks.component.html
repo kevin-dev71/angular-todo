@@ -4,10 +4,10 @@
     <h2>Pending tasks 📝</h2>
 
     <ng-container *ngIf="loading">
-      <div class="task" [ngStyle]="{ cursor: 'initial' }" *ngFor="let item of pendingTasks">
+      <div class="task skeleton-task" *ngFor="let item of pendingTasks">
         <app-skeleton-task-item></app-skeleton-task-item>
       </div>
-      <div *ngIf="pendingTasks.length <= 0" class="task" [ngStyle]="{ cursor: 'initial' }">
+      <div *ngIf="pendingTasks.length <= 0" class="task skeleton-task">
         <app-skeleton-task-item></app-skeleton-task-item>
       </div>
     </ng-container>
@@ -30,10 +30,10 @@
     <h2>Completed tasks ✔️</h2>
 
     <ng-container *ngIf="loading">
-      <div class="task" [ngStyle]="{ cursor: 'initial' }" *ngFor="let item of completedTasks">
+      <div class="task skeleton-task" *ngFor="let item of completedTasks">
         <app-skeleton-task-item></app-skeleton-task-item>
       </div>
-      <div *ngIf="completedTasks.length <= 0" class="task" [ngStyle]="{ cursor: 'initial' }">
+      <div *ngIf="completedTasks.length <= 0" class="task skeleton-task">
         <app-skeleton-task-item></app-skeleton-task-item>
       </div>
     </ng-container>

@@ -4,7 +4,7 @@ import { TaskService } from './task.service';
 import { of } from 'rxjs';
 import { formatDate } from '@angular/common';
 
-import type { Task } from '../models/Task';
+import type { Task } from '../models/task';
 
 describe('TaskService', () => {
   let service: TaskService;

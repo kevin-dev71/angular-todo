@@ -1,7 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastModule } from 'primeng/toast';
+import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SkeletonModule } from 'primeng/skeleton';
 
 import { AppComponent } from './app.component';
 import { TasksFooterComponent } from './components/tasks-footer/tasks-footer.component';
@@ -11,7 +13,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, ToastModule, ConfirmDialogModule],
+      imports: [RouterTestingModule, ToastModule, ConfirmDialogModule, CalendarModule, SkeletonModule],
       declarations: [AppComponent, TasksFooterComponent, SkeletonTaskItemComponent],
       providers: [MessageService, ConfirmationService],
     }).compileComponents();

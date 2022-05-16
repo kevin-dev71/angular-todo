@@ -9,9 +9,9 @@
     [routerLink]="'add'"
     class="p-button-success"></button>
   <button
+    *ngIf="showGoBackButton"
     pButton
     pRipple
-    *ngIf="showGoBackButton"
     class="p-button-outlined p-button-secondary"
     [routerLink]="'/'"
     label="Go Back"></button>
